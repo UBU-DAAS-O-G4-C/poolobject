@@ -10,3 +10,11 @@ Authors:
 
 - Carlos Lopez Nozal
 - Jesus Alonso Abad
+
+Colaboradores:
+
+- Campos Cordero, Zeldan Javier (zcc1001@alu.ubu.es)
+- Fernández Golpe, Guillermo (gfg1001@alu.ubu.es)
+- Sevilla Soba, Ricardo (rss1013@alu.ubu.es)
+- Jódar de la Torre, Miguel Ángel (mjd1003@alu.ubu.es)
+
