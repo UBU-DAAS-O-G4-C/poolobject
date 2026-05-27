@@ -42,11 +42,15 @@ public class ReusablePoolTest {
 	/**
 	 * Test method for {@link ubu.gii.dass.c01.ReusablePool#acquireReusable()}.
 	 */
-	@Test
-	@DisplayName("testAcquireReusable")
-	@Disabled("Not implemented yet")
 
+	@Test
+	@DisplayName("testAcquireReusable - Ricardo")
 	public void testAcquireReusable() {
+    	ReusablePool pool = ReusablePool.getInstance();
+    	final Reusable reusable = pool.acquireReusable();
+    	assertNotNull(reusable, "El objeto adquirido no debe ser nulo.");
+	}
+
 
 	}
 
