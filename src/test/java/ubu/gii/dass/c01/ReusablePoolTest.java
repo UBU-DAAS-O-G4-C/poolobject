@@ -6,6 +6,7 @@ package ubu.gii.dass.c01;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
@@ -42,13 +43,12 @@ public class ReusablePoolTest {
 	/**
 	 * Test method for {@link ubu.gii.dass.c01.ReusablePool#acquireReusable()}.
 	 */
-
 	@Test
 	@DisplayName("testAcquireReusable")
-	public void testAcquireReusable() {
-    	ReusablePool pool = ReusablePool.getInstance();
-    	final Reusable reusable = pool.acquireReusable();
-    	assertNotNull(reusable, "El objeto adquirido no debe ser nulo.");
+	public void testAcquireReusable() throws NotFreeInstanceException {
+		ReusablePool pool = ReusablePool.getInstance();
+		final Reusable reusable = pool.acquireReusable();
+		assertNotNull(reusable, "El objeto adquirido no debe ser nulo.");
 	}
 
 	/**
