@@ -51,9 +51,6 @@ public class ReusablePoolTest {
     	assertNotNull(reusable, "El objeto adquirido no debe ser nulo.");
 	}
 
-
-	}
-
 	/**
 	 * Test method for
 	 * {@link ubu.gii.dass.c01.ReusablePool#releaseReusable(ubu.gii.dass.c01.Reusable)}.
