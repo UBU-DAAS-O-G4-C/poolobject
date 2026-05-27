@@ -5,6 +5,9 @@ package ubu.gii.dass.c01;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 import org.junit.jupiter.api.AfterAll;
@@ -56,10 +59,30 @@ public class ReusablePoolTest {
 	 * {@link ubu.gii.dass.c01.ReusablePool#releaseReusable(ubu.gii.dass.c01.Reusable)}.
 	 */
 	@Test
-	@DisplayName("testReleaseReusable")
-	@Disabled("Not implemented yet")
+	@DisplayName("testReleaseReusable - MigueJodar")
 	public void testReleaseReusable() {
+		ReusablePool pool = ReusablePool.getInstance();
+		java.util.List<Reusable> acquired = new java.util.ArrayList<>();
+		try {
+			while (true) {
+				acquired.add(pool.acquireReusable());
+			}
+		} catch (NotFreeInstanceException e) {
+			// pool drained
+		}
 
+		assertTrue(acquired.size() > 0, "No se pudo adquirir ninguna instancia para la prueba.");
+
+		Reusable r = acquired.get(0);
+
+		assertDoesNotThrow(() -> pool.releaseReusable(r));
+
+		Reusable reacquired = assertDoesNotThrow(() -> pool.acquireReusable());
+		assertSame(r, reacquired, "Al liberar y volver a adquirir se debe obtener la misma instancia.");
+
+		// Ahora probar la excepción al liberar dos veces la misma instancia
+		assertDoesNotThrow(() -> pool.releaseReusable(reacquired));
+		assertThrows(DuplicatedInstanceException.class, () -> pool.releaseReusable(reacquired));
 	}
 
 }
