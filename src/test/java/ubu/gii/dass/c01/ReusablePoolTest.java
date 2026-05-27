@@ -44,7 +44,7 @@ public class ReusablePoolTest {
 	 * Test method for {@link ubu.gii.dass.c01.ReusablePool#acquireReusable()}.
 	 */
 	@Test
-	@DisplayName("testAcquireReusable")
+	@DisplayName("testAcquireReusable - Ricardo")
 	public void testAcquireReusable() throws NotFreeInstanceException {
 		ReusablePool pool = ReusablePool.getInstance();
 		final Reusable reusable = pool.acquireReusable();
