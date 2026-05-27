@@ -44,7 +44,7 @@ public class ReusablePoolTest {
 	 */
 
 	@Test
-	@DisplayName("testAcquireReusable - Ricardo")
+	@DisplayName("testAcquireReusable")
 	public void testAcquireReusable() {
     	ReusablePool pool = ReusablePool.getInstance();
     	final Reusable reusable = pool.acquireReusable();
