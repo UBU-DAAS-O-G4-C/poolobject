@@ -107,6 +107,8 @@ public class ReusablePoolTest {
 
 		assertThrows(NotFreeInstanceException.class, () -> pool.acquireReusable(),
 				"Después de adquirir las dos instancias válidas, el pool debe estar vacío.");
+
+		resetSingletonPoolForGuillermoTest();
 	}
 
 	private void resetSingletonPoolForGuillermoTest() throws Exception {
