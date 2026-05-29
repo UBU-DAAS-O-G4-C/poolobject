@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
@@ -85,4 +84,34 @@ public class ReusablePoolTest {
 		assertThrows(DuplicatedInstanceException.class, () -> pool.releaseReusable(reacquired));
 	}
 
+	/**
+	 * Test que comprueba que no se permite liberar una referencia null en el pool.
+	 * Si el método aceptase null, el pool podría almacenar un objeto inválido y
+	 * devolver null posteriormente al llamar a acquireReusable().
+	 */
+	@Test
+	@DisplayName("releaseReusable no debe aceptar null - Guillermo")
+	public void testReleaseReusableNoAceptaNull() throws Exception {
+		resetSingletonPoolForGuillermoTest();
+
+		ReusablePool pool = ReusablePool.getInstance();
+
+		assertThrows(IllegalArgumentException.class, () -> pool.releaseReusable(null),
+				"No se debe permitir liberar una instancia null en el pool.");
+
+		Reusable r1 = pool.acquireReusable();
+		Reusable r2 = pool.acquireReusable();
+
+		assertNotNull(r1, "La primera instancia válida no debe ser null.");
+		assertNotNull(r2, "La segunda instancia válida no debe ser null.");
+
+		assertThrows(NotFreeInstanceException.class, () -> pool.acquireReusable(),
+				"Después de adquirir las dos instancias válidas, el pool debe estar vacío.");
+	}
+
+	private void resetSingletonPoolForGuillermoTest() throws Exception {
+		java.lang.reflect.Field instance = ReusablePool.class.getDeclaredField("instance");
+		instance.setAccessible(true);
+		instance.set(null, null);
+	}
 }

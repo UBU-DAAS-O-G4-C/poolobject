@@ -53,6 +53,10 @@ public final class ReusablePool{
 	 */
 
 	public void releaseReusable(Reusable r) throws DuplicatedInstanceException {
+		if (r == null) {
+			throw new IllegalArgumentException("No se puede liberar una instancia null en el pool.");
+		}
+
 		if (reusables.contains(r)==false){
 			reusables.add(r);
 		}
